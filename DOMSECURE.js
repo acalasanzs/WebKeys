@@ -5,7 +5,7 @@ class DistincWeakMap extends IterableWeakMap {
   _length = 0;
   set(key, obj) {
     if (IterableWeakMap.prototype.has.call(this, key)) {
-      throw new Error("Used yet");
+      return false;
     }
     const res = IterableWeakMap.prototype.set.call(this, key, obj);
     this._length++;
@@ -13,7 +13,7 @@ class DistincWeakMap extends IterableWeakMap {
   }
   delete(key) {
     const res = IterableWeakMap.prototype.delete.call(this, key);
-    this._length--;
+    if(res) this._length--;
     return res;
   }
   get length() {
